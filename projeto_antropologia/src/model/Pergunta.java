@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.awt.Image;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,26 +14,23 @@ import java.util.List;
  *
  * @author gabriel
  */
-public class Pergunta {
+public class Pergunta implements Serializable{
     
      String texto;
      String [] respostas; 
      int correta;
      int atual;
-     int tipo;
-
-    public Pergunta(String _texto) {
+     Image imagem; 
+    
+     public Pergunta(String _texto) {
         texto = _texto;
         int atual = 0;
         respostas = new String[4];
     }
     
-    public void addResposta(String resp){
+    
+    public void setRespostas(String[] respostas){
         
-        if (atual <= 3) {
-            respostas[atual] = resp;
-            atual++;
-        }
     }
 
     public void setCorreta(int correta) {
@@ -51,9 +50,9 @@ public class Pergunta {
         return correta;
     }
     
+    public void setImagem(Image i){
+        imagem = i;
+    }
     
-    
-    
-    public void exibir(){};
     
 }
