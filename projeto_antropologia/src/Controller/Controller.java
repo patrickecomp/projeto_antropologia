@@ -6,6 +6,8 @@
 package Controller;
 
 import java.awt.Image;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import model.Quizz;
 
 /**
@@ -35,6 +37,11 @@ public class Controller {
     public void addPergunta(String pergunta, String[] respostas, int resposaCorreta, Image imagem){
         quizz.addPergunta(pergunta, respostas, resposaCorreta, imagem);
     }
+
+    public void salvarEstado() {
+        quizz.salvarEstado();
+    }
+
     
     
 }

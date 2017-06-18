@@ -6,6 +6,11 @@
 package model;
 
 import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +32,38 @@ public class Quizz implements Serializable{
     */
     private Quizz() {
         perguntas = new ArrayList<>();
+
     }
     
     public static Quizz getInstancia(){
-        if(instancia == null)
-            instancia = new Quizz();
+        if(instancia == null){
+            File file = new File("C:/Users/Patrick/Documents/GitHub/projeto_antropologia/projeto_antropologia/data");
+            File afile[] = file.listFiles();
+            int i = 0;
+            for (int j = afile.length; i < j; i++) {
+                File arquivos = afile[i];
+                if(arquivos.getName().equals("perguntas.dat")){
+                    try
+                    {
+                        //Carrega o arquivo
+                        FileInputStream arquivoLeitura = new FileInputStream("C:/Users/Patrick/Documents/GitHub/projeto_antropologia/projeto_antropologia/data/perguntas.dat");
+                        //Classe responsavel por recuperar os objetos do arquivo
+                        ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura);
+                        if(objLeitura.readObject() instanceof Quizz){
+                            instancia = (Quizz) objLeitura.readObject();
+                        }
+                        objLeitura.close();
+                        arquivoLeitura.close();
+                    }
+                    catch( Exception e ){
+                        e.printStackTrace( );
+                    }
+                }
+            }
+            if(instancia == null)
+                instancia = new Quizz();
+            
+        }
         return instancia;
     }
     //============================================================
@@ -41,6 +73,11 @@ public class Quizz implements Serializable{
         jogador = new Jogador(nome);
     }
     
+    public void listPerguntas(){
+        for(int i = 0; i < perguntas.size();i++){
+            System.out.println(perguntas.get(i).getTexto());
+        }
+    }
     
     public void addPergunta(String pergunta, String[] respostas, int resposaCorreta, Image imagem){
         Pergunta temp = new Pergunta(pergunta);
@@ -48,6 +85,32 @@ public class Quizz implements Serializable{
         temp.setCorreta(resposaCorreta);
         temp.setImagem(imagem);
         perguntas.add(temp);
+        listPerguntas();
+    }
+
+    public void salvarEstado() {
+                // Cria o objeto serializado
+        try
+        {
+            //Gera o arquivo para armazenar o objeto
+            FileOutputStream arquivoGrav = new FileOutputStream("C:/Users/Patrick/Documents/GitHub/projeto_antropologia/projeto_antropologia/data/perguntas.dat");
+            //Classe responsavel por inserir os objetos 
+            ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
+            //Grava o objeto cliente no arquivo
+            objGravar.writeObject(this);
+            objGravar.flush();
+            objGravar.close();
+            arquivoGrav.flush();
+            arquivoGrav.close();
+            System.out.println("Objeto gravado com sucesso!");
+
+        }
+
+        catch( Exception e ){
+
+                e.printStackTrace( );
+
+        }
     }
     
     
