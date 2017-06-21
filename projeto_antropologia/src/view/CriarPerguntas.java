@@ -21,6 +21,7 @@ public class CriarPerguntas extends javax.swing.JFrame {
     public CriarPerguntas() {
         initComponents();
         controller = Controller.getInstancia();
+        controller.initDados();
     }
 
     /**
@@ -90,7 +91,6 @@ public class CriarPerguntas extends javax.swing.JFrame {
         //verificar se os itens estão vazios antes de salvar
         controller.addPergunta(pergunta_texto.getText(), pergunta_frame.respostas(), 
               pergunta_frame.respostaCorreta(), null);
-        controller.salvarEstado();
         //fechar janela 
      
     }//GEN-LAST:event_botao_salvar_fecharActionPerformed
