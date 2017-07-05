@@ -35,6 +35,13 @@ public class Controller {
     public void addPergunta(String pergunta, String[] respostas, int resposaCorreta, Image imagem){
         quizz.addPergunta(pergunta, respostas, resposaCorreta, imagem);
     }
+
+ 
+
+    public void initDados() {
+        quizz.carregarDados();
+    }
+
     
     
 }

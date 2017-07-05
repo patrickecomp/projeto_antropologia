@@ -20,7 +20,9 @@ public class CriarPerguntas extends javax.swing.JFrame {
      */
     public CriarPerguntas() {
         initComponents();
+        setResizable(false);
         controller = Controller.getInstancia();
+        //controller.initDados();
     }
 
     /**
@@ -89,7 +91,7 @@ public class CriarPerguntas extends javax.swing.JFrame {
       
         //verificar se os itens estão vazios antes de salvar
         controller.addPergunta(pergunta_texto.getText(), pergunta_frame.respostas(), 
-              pergunta_frame.respostaCorreta(), null);
+              pergunta_frame.respostaCorreta(), pergunta_frame.image);
         //fechar janela 
      
     }//GEN-LAST:event_botao_salvar_fecharActionPerformed
@@ -103,7 +105,7 @@ public class CriarPerguntas extends javax.swing.JFrame {
 
     private void salvar_perguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvar_perguntaActionPerformed
         controller.addPergunta(pergunta_texto.getText(), pergunta_frame.respostas(), 
-              pergunta_frame.respostaCorreta(), null);
+              pergunta_frame.respostaCorreta(), pergunta_frame.image);
         pergunta_texto.setText("");
         pergunta_frame.limpar();
         

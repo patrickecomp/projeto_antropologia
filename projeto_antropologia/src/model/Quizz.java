@@ -6,7 +6,13 @@
 package model;
 
 import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +25,7 @@ public class Quizz implements Serializable{
     private static Quizz instancia;
     private List<Pergunta> perguntas;
     private Jogador jogador;
+    private List<Pergunta> naoRespondidas;
     
     
     //============================================================
@@ -27,6 +34,10 @@ public class Quizz implements Serializable{
     */
     private Quizz() {
         perguntas = new ArrayList<>();
+        naoRespondidas = new ArrayList<>();
+        
+        naoRespondidas.addAll(perguntas);
+
     }
     
     public static Quizz getInstancia(){
@@ -37,17 +48,106 @@ public class Quizz implements Serializable{
     //============================================================
     
     
+    
+    /***
+     * Seta o jogador 
+     * @param nome nome do jogador
+     */
     public void addJogador(String nome){
         jogador = new Jogador(nome);
     }
     
     
+    /**
+     * Sorteia a pergunta;
+     * Remove uma pergunta da lista de não respondidas e retorna para quem chamar; 
+     * @return 
+     */
+    public Pergunta sorteiaPergunta(){
+        //sorteia um número aleatório entre 0 e o tamanho da lista de não respondidas
+        int i = (int) Math.random() * naoRespondidas.size();
+        return naoRespondidas.remove(i - 1); //index começa em 0 então vai até N - 1
+    }
+    
+    /***
+     * Método responsável por zerar o jogo para nova jogatina
+     */
+    public void reinicia(){
+        
+        //zera as perguntas não respondidas
+        naoRespondidas = new ArrayList<>();
+        naoRespondidas.addAll(perguntas);
+    }
+    /***
+     * Adiciona pergunta ao quizz 
+     * @param pergunta texto das perguntas
+     * @param respostas vetor de tamanho 4 contendo texto das respostas 
+     * @param resposaCorreta indice da resposta correta no vetor 
+     * @param imagem objeto imagem já carregada na memória
+     */
     public void addPergunta(String pergunta, String[] respostas, int resposaCorreta, Image imagem){
         Pergunta temp = new Pergunta(pergunta);
         temp.setRespostas(respostas);
         temp.setCorreta(resposaCorreta);
         temp.setImagem(imagem);
         perguntas.add(temp);
+       
+        naoRespondidas.add(temp); //adiciona pergunta à lista de não respondidas 
+        try{
+		
+
+		FileOutputStream fout = new FileOutputStream("C:/Users/Patrick/Documents/GitHub/projeto_antropologia/projeto_antropologia/data/pergunta"+perguntas.size()+".dat");
+
+                
+
+		ObjectOutputStream oos = new ObjectOutputStream(fout);   
+
+		oos.writeObject(temp);
+		
+		oos.close();
+ 
+	   }catch(Exception ex){
+		   ex.printStackTrace();
+	   } 
+    }
+
+
+    
+    /***
+     * Carrega as perguntas do Quizz para memória. 
+     */
+    public void carregarDados() {
+            File file = new File("C:/Users/Patrick/Documents/GitHub/projeto_antropologia/projeto_antropologia/data");
+            File afile[] = file.listFiles();
+            int i = 0;
+            for (int j = afile.length; i < j; i++) {
+                File arquivos = afile[i];
+                try{
+		   
+		   /*
+		    * Responsável por carregar o arquivo address.ser
+		    * */
+		   FileInputStream fin = new FileInputStream("C:/Users/Patrick/Documents/GitHub/projeto_antropologia/projeto_antropologia/data/"+arquivos.getName());
+		   
+		   /*
+		    * Responsável por ler o objeto referente ao arquivo
+		    * */
+		   ObjectInputStream ois = new ObjectInputStream(fin);
+		   
+		   /*
+		    * Aqui a mágica é feita, onde os bytes presentes no arquivo address.ser
+		    * são convertidos em uma instância de Address.
+		    * */
+		   Pergunta tagetPergunta = (Pergunta) ois.readObject();
+		   ois.close();
+ 
+                   perguntas.add(tagetPergunta);
+                   
+ 
+	   }catch(Exception ex){
+		   ex.printStackTrace(); 
+	   }
+        }
     }
     
     
