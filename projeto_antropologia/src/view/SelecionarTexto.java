@@ -39,6 +39,9 @@ public class SelecionarTexto extends javax.swing.JPanel {
         resposta_2.setText("");
         resposta_3.setText("");
         resposta_4.setText("");
+        
+        seleciona_imagem.setText("selecione");
+        image = null;
     }
     public int respostaCorreta(){
         if(correta_resposta_1.isSelected())
@@ -68,6 +71,7 @@ public class SelecionarTexto extends javax.swing.JPanel {
         limpar();
         seletor_imagem.setDialogTitle("Escolha a imagem que deseja adicionar");
         seletor_imagem.setFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "bmp", "jpeg"));
+        
     }
 
     /**
@@ -188,15 +192,15 @@ public class SelecionarTexto extends javax.swing.JPanel {
                         .addGap(103, 103, 103))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(seleciona_imagem)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(seleciona_imagem, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3))
+                        .addGap(0, 17, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +257,7 @@ public class SelecionarTexto extends javax.swing.JPanel {
         try {
             File file = fileChooser.getSelectedFile();
             imagem_diretorio = file.getAbsolutePath();
-            seleciona_imagem.setText(imagem_diretorio);
+            seleciona_imagem.setText("OK");
             image = ImageIO.read(file);
             
 //    JFrame frame = new JFrame();
