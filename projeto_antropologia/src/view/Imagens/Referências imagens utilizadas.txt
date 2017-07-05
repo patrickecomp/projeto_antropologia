@@ -1,0 +1,5 @@
+Referências das imagens:
+Tela de início - https://pixabay.com/pt/m%C3%A9xico-museu-antropol%C3%B3gico-glyph-1290727/
+Tela de acerto - https://pixabay.com/pt/rosto-feliz-macaco-2025024/
+Tela de erro - https://pixabay.com/pt/rosto-macaco-triste-2025029/
+Tela de finalização - https://pixabay.com/pt/macaco-animal-feliz-papel-brown-161227/

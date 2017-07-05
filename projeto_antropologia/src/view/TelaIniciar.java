@@ -38,7 +38,7 @@ public class TelaIniciar {
         janela.setVisible(true);
 
         //Pegando imagem.
-        ImageIcon icon2 = new ImageIcon(getClass().getResource("Capturar.JPG"));
+        ImageIcon icon2 = new ImageIcon(getClass().getResource("TelaInicio_1.JPG"));
         imagem = new JLabel(icon2);
 
         //Container para imagem
