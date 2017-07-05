@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class Quizz implements Serializable{
     private static Quizz instancia;
     private List<Pergunta> perguntas;
     private Jogador jogador;
+    private List<Pergunta> naoRespondidas;
     
     
     //============================================================
@@ -32,6 +34,9 @@ public class Quizz implements Serializable{
     */
     private Quizz() {
         perguntas = new ArrayList<>();
+        naoRespondidas = new ArrayList<>();
+        
+        naoRespondidas.addAll(perguntas);
 
     }
     
@@ -43,18 +48,51 @@ public class Quizz implements Serializable{
     //============================================================
     
     
+    
+    /***
+     * Seta o jogador 
+     * @param nome nome do jogador
+     */
     public void addJogador(String nome){
         jogador = new Jogador(nome);
     }
     
     
+    /**
+     * Sorteia a pergunta;
+     * Remove uma pergunta da lista de não respondidas e retorna para quem chamar; 
+     * @return 
+     */
+    public Pergunta sorteiaPergunta(){
+        //sorteia um número aleatório entre 0 e o tamanho da lista de não respondidas
+        int i = (int) Math.random() * naoRespondidas.size();
+        return naoRespondidas.remove(i - 1); //index começa em 0 então vai até N - 1
+    }
+    
+    /***
+     * Método responsável por zerar o jogo para nova jogatina
+     */
+    public void reinicia(){
+        
+        //zera as perguntas não respondidas
+        naoRespondidas = new ArrayList<>();
+        naoRespondidas.addAll(perguntas);
+    }
+    /***
+     * Adiciona pergunta ao quizz 
+     * @param pergunta texto das perguntas
+     * @param respostas vetor de tamanho 4 contendo texto das respostas 
+     * @param resposaCorreta indice da resposta correta no vetor 
+     * @param imagem objeto imagem já carregada na memória
+     */
     public void addPergunta(String pergunta, String[] respostas, int resposaCorreta, Image imagem){
         Pergunta temp = new Pergunta(pergunta);
         temp.setRespostas(respostas);
         temp.setCorreta(resposaCorreta);
         temp.setImagem(imagem);
         perguntas.add(temp);
-        
+       
+        naoRespondidas.add(temp); //adiciona pergunta à lista de não respondidas 
         try{
 		
 
@@ -74,6 +112,10 @@ public class Quizz implements Serializable{
     }
 
 
+    
+    /***
+     * Carrega as perguntas do Quizz para memória. 
+     */
     public void carregarDados() {
             File file = new File("C:/Users/Patrick/Documents/GitHub/projeto_antropologia/projeto_antropologia/data");
             File afile[] = file.listFiles();
