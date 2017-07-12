@@ -8,6 +8,7 @@ package model;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -69,6 +70,16 @@ public class Quizz implements Serializable{
         return naoRespondidas.remove(i - 1); //index começa em 0 então vai até N - 1
     }
     
+    public boolean perguntaCerta(int resposta, Pergunta perguntaAtual){
+        if(perguntaAtual.correta == resposta){
+            jogador.novoAcerto();
+            return true;
+        }else{
+            jogador.novoErro();
+            return false;
+        }
+    }
+    
     /***
      * Método responsável por zerar o jogo para nova jogatina
      */
@@ -96,13 +107,11 @@ public class Quizz implements Serializable{
         try{
 		
 
-		FileOutputStream fout = new FileOutputStream("C:/Users/Patrick/Documents/GitHub/projeto_antropologia/projeto_antropologia/data/pergunta"+perguntas.size()+".dat");
-
-                
+		FileOutputStream fout = new FileOutputStream(new File("").getAbsolutePath()+File.separator+"data"+File.separator+"perguntas.dat");
 
 		ObjectOutputStream oos = new ObjectOutputStream(fout);   
 
-		oos.writeObject(temp);
+		oos.writeObject(perguntas);
 		
 		oos.close();
  
@@ -117,17 +126,12 @@ public class Quizz implements Serializable{
      * Carrega as perguntas do Quizz para memória. 
      */
     public void carregarDados() {
-            File file = new File("C:/Users/Patrick/Documents/GitHub/projeto_antropologia/projeto_antropologia/data");
-            File afile[] = file.listFiles();
-            int i = 0;
-            for (int j = afile.length; i < j; i++) {
-                File arquivos = afile[i];
                 try{
 		   
 		   /*
 		    * Responsável por carregar o arquivo address.ser
 		    * */
-		   FileInputStream fin = new FileInputStream("C:/Users/Patrick/Documents/GitHub/projeto_antropologia/projeto_antropologia/data/"+arquivos.getName());
+		   FileInputStream fin = new FileInputStream(new File("").getAbsolutePath()+File.separator+"data"+File.separator+"perguntas.dat");
 		   
 		   /*
 		    * Responsável por ler o objeto referente ao arquivo
@@ -138,16 +142,32 @@ public class Quizz implements Serializable{
 		    * Aqui a mágica é feita, onde os bytes presentes no arquivo address.ser
 		    * são convertidos em uma instância de Address.
 		    * */
-		   Pergunta tagetPergunta = (Pergunta) ois.readObject();
+		   perguntas = (List<Pergunta>) ois.readObject();
 		   ois.close();
- 
-                   perguntas.add(tagetPergunta);
+
                    
  
+	   }catch(FileNotFoundException ex1){
+		
+               try{
+		
+
+		FileOutputStream fout = new FileOutputStream(new File("").getAbsolutePath()+File.separator+"data"+File.separator+"perguntas.dat");
+
+		ObjectOutputStream oos = new ObjectOutputStream(fout);   
+
+		oos.writeObject(perguntas);
+		
+		oos.close();
+ 
+	   }catch(Exception ex){
+		   ex.printStackTrace();
+	   } 
 	   }catch(Exception ex){
 		   ex.printStackTrace(); 
 	   }
-        }
+                
+                System.out.println("size: "+perguntas.size());
     }
     
     

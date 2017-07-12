@@ -11,25 +11,31 @@ package model;
  */
 public class Jogador {
     private String nome;
-    private int pontos;
+    private int acertos;
+    private int erros;
 
     public String getNome() {
         return nome;
     }
 
     public int getPontos() {
-        return pontos;
+        return acertos;
     }
 
     
     
     public Jogador(String nome) {
         this.nome = nome;
-        pontos = 0;
+        acertos = 0;
+        erros = 0;
     }
     
     protected void novoAcerto(){
-        pontos++;
+        acertos++;
+    }
+    
+    protected void novoErro(){
+        erros++;
     }
     
 

@@ -22,7 +22,7 @@ public class CriarPerguntas extends javax.swing.JFrame {
         initComponents();
         setResizable(false);
         controller = Controller.getInstancia();
-        //controller.initDados();
+        controller.initDados();
     }
 
     /**
