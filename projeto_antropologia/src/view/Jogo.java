@@ -51,8 +51,11 @@ public class Jogo extends javax.swing.JFrame {
         
         if(perguntaAtual.getImagem() != null){
             JLabel label = new JLabel(perguntaAtual.getImagem());
+            label.setBounds(0, 0, 257, 272);
             imagem.add(label);
             imagem.setVisible(true);
+        } else{
+            imagem.setVisible(false);
         }
     }
 
@@ -98,6 +101,9 @@ public class Jogo extends javax.swing.JFrame {
         resposta4.setText("jRadioButton4");
         resposta4.setActionCommand("resposta4");
 
+        jScrollPane1.setBackground(new java.awt.Color(238, 238, 238));
+        jScrollPane1.setBorder(null);
+
         pergunta.setEditable(false);
         pergunta.setBackground(new java.awt.Color(238, 238, 238));
         pergunta.setColumns(22);
@@ -128,7 +134,7 @@ public class Jogo extends javax.swing.JFrame {
         );
         imagemLayout.setVerticalGroup(
             imagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 272, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,11 +142,11 @@ public class Jogo extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(proxima_pergunta)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(40, 40, 40)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(resposta4)
                                 .addComponent(resposta3)
@@ -148,9 +154,7 @@ public class Jogo extends javax.swing.JFrame {
                                 .addComponent(resposta1))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(imagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(16, 16, 16)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -167,10 +171,9 @@ public class Jogo extends javax.swing.JFrame {
                         .addGap(49, 49, 49)
                         .addComponent(resposta3)
                         .addGap(45, 45, 45)
-                        .addComponent(resposta4)
-                        .addGap(0, 31, Short.MAX_VALUE))
-                    .addComponent(imagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                        .addComponent(resposta4))
+                    .addComponent(imagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(proxima_pergunta)
                 .addContainerGap())
         );

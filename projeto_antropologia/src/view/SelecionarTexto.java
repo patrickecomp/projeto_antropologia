@@ -6,6 +6,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -259,7 +260,11 @@ public class SelecionarTexto extends javax.swing.JPanel {
             File file = fileChooser.getSelectedFile();
             imagem_diretorio = file.getAbsolutePath();
             seleciona_imagem.setText("OK");
-            image = new ImageIcon(ImageIO.read(file));
+            BufferedImage k = ImageIO.read(file);
+            BufferedImage resizedImage = new BufferedImage(257, 272, k.getType());
+            Graphics2D g = resizedImage.createGraphics();
+            g.drawImage(k, 0, 0, 257, 272, null);
+            image = new ImageIcon(resizedImage);
             
 //    JFrame frame = new JFrame();
 //    JLabel label = new JLabel(new ImageIcon(image));
