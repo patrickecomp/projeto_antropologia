@@ -7,6 +7,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -27,7 +28,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class SelecionarTexto extends javax.swing.JPanel {
 
     String imagem_diretorio;
-    Image image;
+    ImageIcon image;
     
     public void limpar(){
         correta_resposta_1.setSelected(true);
@@ -258,7 +259,7 @@ public class SelecionarTexto extends javax.swing.JPanel {
             File file = fileChooser.getSelectedFile();
             imagem_diretorio = file.getAbsolutePath();
             seleciona_imagem.setText("OK");
-            image = ImageIO.read(file);
+            image = new ImageIcon(ImageIO.read(file));
             
 //    JFrame frame = new JFrame();
 //    JLabel label = new JLabel(new ImageIcon(image));

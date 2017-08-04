@@ -5,7 +5,9 @@
  */
 package model;
 
+import exception.FimDeJogoException;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,6 +18,8 @@ import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import javax.swing.ImageIcon;
 
 /**
  * Classe que representa a instancia do jogo;
@@ -37,7 +41,7 @@ public class Quizz implements Serializable{
         perguntas = new ArrayList<>();
         naoRespondidas = new ArrayList<>();
         
-        naoRespondidas.addAll(perguntas);
+       
 
     }
     
@@ -64,10 +68,13 @@ public class Quizz implements Serializable{
      * Remove uma pergunta da lista de não respondidas e retorna para quem chamar; 
      * @return 
      */
-    public Pergunta sorteiaPergunta(){
+    public Pergunta sorteiaPergunta() throws FimDeJogoException{
         //sorteia um número aleatório entre 0 e o tamanho da lista de não respondidas
-        int i = (int) Math.random() * naoRespondidas.size();
-        return naoRespondidas.remove(i - 1); //index começa em 0 então vai até N - 1
+        if(naoRespondidas.size() == 0)
+            throw new FimDeJogoException();
+        Random gerador = new Random();
+        int i = gerador.nextInt(naoRespondidas.size());
+        return naoRespondidas.remove(i); //index começa em 0 então vai até N - 1
     }
     
     public boolean perguntaCerta(int resposta, Pergunta perguntaAtual){
@@ -96,7 +103,7 @@ public class Quizz implements Serializable{
      * @param resposaCorreta indice da resposta correta no vetor 
      * @param imagem objeto imagem já carregada na memória
      */
-    public void addPergunta(String pergunta, String[] respostas, int resposaCorreta, Image imagem){
+    public void addPergunta(String pergunta, String[] respostas, int resposaCorreta, ImageIcon imagem){
         Pergunta temp = new Pergunta(pergunta);
         temp.setRespostas(respostas);
         temp.setCorreta(resposaCorreta);
@@ -168,6 +175,7 @@ public class Quizz implements Serializable{
 	   }
                 
                 System.out.println("size: "+perguntas.size());
+                naoRespondidas.addAll(perguntas);
     }
     
     

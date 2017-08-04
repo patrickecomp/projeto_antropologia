@@ -5,7 +5,11 @@
  */
 package Controller;
 
+import exception.FimDeJogoException;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
+import model.Pergunta;
 import model.Quizz;
 
 /**
@@ -17,6 +21,11 @@ public class Controller {
     private Quizz quizz;
     private static Controller instancia;
     
+    
+    
+   public Pergunta ProximaPergunta() throws FimDeJogoException{
+       return quizz.sorteiaPergunta();
+   }
     private Controller(){
         quizz = Quizz.getInstancia();
     }
@@ -32,7 +41,7 @@ public class Controller {
     }
     
     
-    public void addPergunta(String pergunta, String[] respostas, int resposaCorreta, Image imagem){
+    public void addPergunta(String pergunta, String[] respostas, int resposaCorreta, ImageIcon imagem){
         quizz.addPergunta(pergunta, respostas, resposaCorreta, imagem);
     }
 

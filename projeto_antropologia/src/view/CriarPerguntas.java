@@ -6,6 +6,7 @@
 package view;
 
 import Controller.Controller;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -88,6 +89,7 @@ public class CriarPerguntas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botao_salvar_fecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_salvar_fecharActionPerformed
+      
       
         //verificar se os itens estão vazios antes de salvar
         controller.addPergunta(pergunta_texto.getText(), pergunta_frame.respostas(), 
