@@ -8,6 +8,7 @@ package view;
 import Controller.Controller;
 import exception.FimDeJogoException;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -23,6 +24,8 @@ import model.Pergunta;
 
 public class Jogo extends javax.swing.JFrame {
 
+    JLabel ultimo_label;
+    FinalDeJogoDialog finalDeJogoDialog;
     RespostaEmBrancoDialog respostaEmBrancoDialog;
     int resposta_marcada = -1;
     Controller cont;
@@ -36,6 +39,8 @@ public class Jogo extends javax.swing.JFrame {
         initDialogs();
         initComponents();
         setLocationRelativeTo(null);
+        proxima_pergunta.setBackground(Color.GREEN);
+        //proxima_pergunta.setOpaque(true);
         setResizable(false);
         cont = Controller.getInstancia();
         cont.initDados();
@@ -67,6 +72,7 @@ public class Jogo extends javax.swing.JFrame {
         if(perguntaAtual.getImagem() != null){
             JLabel label = new JLabel(perguntaAtual.getImagem());
             label.setBounds(0, 0, 257, 272);
+            imagem.removeAll();
             imagem.add(label);
             imagem.setVisible(true);
         } else{
@@ -146,9 +152,9 @@ public class Jogo extends javax.swing.JFrame {
         pergunta.setBorder(null);
         jScrollPane1.setViewportView(pergunta);
 
-        proxima_pergunta.setBackground(new java.awt.Color(51, 204, 0));
+        proxima_pergunta.setBackground(new java.awt.Color(204, 204, 204));
         proxima_pergunta.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        proxima_pergunta.setForeground(new java.awt.Color(255, 255, 255));
+        proxima_pergunta.setForeground(new java.awt.Color(102, 255, 0));
         proxima_pergunta.setText("PRÓXIMA");
         proxima_pergunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,6 +225,14 @@ public class Jogo extends javax.swing.JFrame {
         resposta_marcada = 1;
     }//GEN-LAST:event_resposta2ActionPerformed
 
+    public void recomeca(){
+        try {
+            perguntaAtual = cont.ProximaPergunta();
+        } catch (FimDeJogoException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        bindingPergunta();
+    }
     private void proxima_perguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proxima_perguntaActionPerformed
         try {
             if(resposta_marcada == -1){
@@ -226,12 +240,14 @@ public class Jogo extends javax.swing.JFrame {
                 respostaEmBrancoDialog.setVisible(true);
             }
             else{
+                cont.respostaCerta(resposta_marcada, perguntaAtual);
                 perguntaAtual = cont.ProximaPergunta();
                 bindingPergunta();
             }
             
         } catch (FimDeJogoException ex) {
-            //mostrar o resultado
+            finalDeJogoDialog.setTextOnFinal();
+            finalDeJogoDialog.setVisible(true);
         }
     }//GEN-LAST:event_proxima_perguntaActionPerformed
 
@@ -294,6 +310,7 @@ public class Jogo extends javax.swing.JFrame {
         });
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel imagem;
@@ -310,5 +327,9 @@ public class Jogo extends javax.swing.JFrame {
        respostaEmBrancoDialog = new RespostaEmBrancoDialog(new javax.swing.JFrame(), true);
        respostaEmBrancoDialog.setLocationRelativeTo(this);
        respostaEmBrancoDialog.setVisible(false);
+       
+       finalDeJogoDialog = new FinalDeJogoDialog(this, true);
+       finalDeJogoDialog.setLocationRelativeTo(this);
+       finalDeJogoDialog.setVisible(false);
     }
 }

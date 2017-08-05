@@ -36,6 +36,7 @@ public class TelaIniciar {
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.setSize(new Dimension(700, 600));
         janela.setResizable(false);
+        janela.setLocationRelativeTo(null);
         janela.setVisible(true);
 
         //Pegando imagem.

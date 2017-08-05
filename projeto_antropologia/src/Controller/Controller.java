@@ -56,5 +56,16 @@ public class Controller {
         return quizz.respostaCerta(resposta, perg); 
     }
     
+    public void reinicia(){
+        quizz.reinicia();
+    }
+    
+    public int getErros(){
+        return quizz.getErros();
+    }
+    
+    public int getAcertos(){
+        return quizz.getAcertos();
+    }
     
 }

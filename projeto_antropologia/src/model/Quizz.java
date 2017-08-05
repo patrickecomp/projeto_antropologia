@@ -40,7 +40,7 @@ public class Quizz implements Serializable{
     private Quizz() {
         perguntas = new ArrayList<>();
         naoRespondidas = new ArrayList<>();
-        
+        jogador = new Jogador(null);
        
 
     }
@@ -95,6 +95,7 @@ public class Quizz implements Serializable{
         //zera as perguntas não respondidas
         naoRespondidas = new ArrayList<>();
         naoRespondidas.addAll(perguntas);
+        jogador = new Jogador(null);
     }
     /***
      * Adiciona pergunta ao quizz 
@@ -128,6 +129,13 @@ public class Quizz implements Serializable{
     }
 
 
+    public int getErros(){
+        return jogador.getErros();
+    }
+    
+    public int getAcertos(){
+        return jogador.getPontos();
+    }
     
     /***
      * Carrega as perguntas do Quizz para memória. 

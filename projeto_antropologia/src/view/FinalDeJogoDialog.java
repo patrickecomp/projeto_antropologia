@@ -5,18 +5,30 @@
  */
 package view;
 
+import Controller.Controller;
+import java.awt.Frame;
+
 /**
  *
  * @author gabrielantonio
  */
 public class FinalDeJogoDialog extends javax.swing.JDialog {
 
+    Frame parent;
     /**
      * Creates new form FinalDeJogoDialog
      */
     public FinalDeJogoDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.parent = parent;
+        setResizable(false);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+    }
+    
+    public void setTextOnFinal(){
+        texto_acerto.setText("VOCÊ ACERTOU " +Controller.getInstancia().getAcertos()+" PERGUNTAS!");
+        texto_erro.setText("VOCÊ ERROU " +Controller.getInstancia().getErros()+" PERGUNTAS!");
     }
 
     /**
@@ -28,21 +40,85 @@ public class FinalDeJogoDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        texto_acerto = new javax.swing.JLabel();
+        texto_erro = new javax.swing.JLabel();
+        reiniciar_jogo = new javax.swing.JButton();
+        fechar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel1.setText("PARABÉNS VOCÊ CHEGOU AO FINAL DO JOGO!");
+
+        texto_acerto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        texto_acerto.setForeground(new java.awt.Color(51, 204, 0));
+        texto_acerto.setText("VOCÊ ACERTOU X QUESTÕES ");
+
+        texto_erro.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        texto_erro.setForeground(new java.awt.Color(255, 0, 51));
+        texto_erro.setText("VOCÊ ERROU X QUESTÕES ");
+
+        reiniciar_jogo.setText("reiniciar jogo");
+        reiniciar_jogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reiniciar_jogoActionPerformed(evt);
+            }
+        });
+
+        fechar.setText("fechar");
+        fechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fecharActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(fechar)
+                        .addGap(18, 18, 18)
+                        .addComponent(reiniciar_jogo))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(texto_erro)
+                        .addComponent(texto_acerto)
+                        .addComponent(jLabel1)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addGap(28, 28, 28)
+                .addComponent(texto_acerto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(texto_erro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(reiniciar_jogo)
+                    .addComponent(fechar))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void reiniciar_jogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciar_jogoActionPerformed
+        Controller.getInstancia().reinicia();
+        ((Jogo)parent).recomeca();
+        setVisible(false);
+    }//GEN-LAST:event_reiniciar_jogoActionPerformed
+
+    private void fecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharActionPerformed
+        this.setVisible(false);
+        parent.dispose();
+    }//GEN-LAST:event_fecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -87,5 +163,10 @@ public class FinalDeJogoDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton fechar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton reiniciar_jogo;
+    public javax.swing.JLabel texto_acerto;
+    public javax.swing.JLabel texto_erro;
     // End of variables declaration//GEN-END:variables
 }
