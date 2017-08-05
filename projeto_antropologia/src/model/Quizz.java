@@ -77,7 +77,7 @@ public class Quizz implements Serializable{
         return naoRespondidas.remove(i); //index começa em 0 então vai até N - 1
     }
     
-    public boolean perguntaCerta(int resposta, Pergunta perguntaAtual){
+    public boolean respostaCerta(int resposta, Pergunta perguntaAtual){
         if(perguntaAtual.correta == resposta){
             jogador.novoAcerto();
             return true;

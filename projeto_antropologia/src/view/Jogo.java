@@ -22,14 +22,19 @@ import model.Pergunta;
  */
 public class Jogo extends javax.swing.JFrame {
 
-    
+    RespostaEmBrancoDialog respostaEmBrancoDialog;
+    int resposta_marcada = -1;
     Controller cont;
     Pergunta perguntaAtual;
     /**
      * Creates new form Jogo
      */
     public Jogo() {
+        
+        
+        initDialogs();
         initComponents();
+        setResizable(false);
         cont = Controller.getInstancia();
         cont.initDados();
         try {
@@ -40,6 +45,13 @@ public class Jogo extends javax.swing.JFrame {
         bindingPergunta();
     }
     
+    private void limpar(){
+        resposta_marcada = -1;
+         resposta1.setSelected(false);
+        resposta2.setSelected(false);
+        resposta3.setSelected(false);
+        resposta4.setSelected(false);
+    }
     
     private void bindingPergunta(){
         pergunta.setText(perguntaAtual.getTexto());
@@ -48,6 +60,7 @@ public class Jogo extends javax.swing.JFrame {
         resposta3.setText(perguntaAtual.getRespostas()[2]);
         resposta4.setText(perguntaAtual.getRespostas()[3]);
         
+        limpar();
         
         if(perguntaAtual.getImagem() != null){
             JLabel label = new JLabel(perguntaAtual.getImagem());
@@ -83,6 +96,11 @@ public class Jogo extends javax.swing.JFrame {
         resposta1.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         resposta1.setText("jRadioButton1");
         resposta1.setActionCommand("resposta1");
+        resposta1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resposta1ActionPerformed(evt);
+            }
+        });
 
         resposta2.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         resposta2.setText("jRadioButton2");
@@ -96,10 +114,20 @@ public class Jogo extends javax.swing.JFrame {
         resposta3.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         resposta3.setText("jRadioButton3");
         resposta3.setActionCommand("resposta3");
+        resposta3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resposta3ActionPerformed(evt);
+            }
+        });
 
         resposta4.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         resposta4.setText("jRadioButton4");
         resposta4.setActionCommand("resposta4");
+        resposta4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resposta4ActionPerformed(evt);
+            }
+        });
 
         jScrollPane1.setBackground(new java.awt.Color(238, 238, 238));
         jScrollPane1.setBorder(null);
@@ -182,17 +210,51 @@ public class Jogo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void resposta2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resposta2ActionPerformed
-        // TODO add your handling code here:
+        resposta1.setSelected(false);
+        resposta2.setSelected(true);
+        resposta3.setSelected(false);
+        resposta4.setSelected(false);
+        resposta_marcada = 1;
     }//GEN-LAST:event_resposta2ActionPerformed
 
     private void proxima_perguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proxima_perguntaActionPerformed
         try {
-            perguntaAtual = cont.ProximaPergunta();
-            bindingPergunta();
+            if(resposta_marcada == -1){
+                respostaEmBrancoDialog.setVisible(true);
+            }
+            else{
+                perguntaAtual = cont.ProximaPergunta();
+                bindingPergunta();
+            }
+            
         } catch (FimDeJogoException ex) {
             //mostrar o resultado
         }
     }//GEN-LAST:event_proxima_perguntaActionPerformed
+
+    private void resposta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resposta1ActionPerformed
+        resposta1.setSelected(true);
+        resposta2.setSelected(false);
+        resposta3.setSelected(false);
+        resposta4.setSelected(false);
+        resposta_marcada = 0;
+    }//GEN-LAST:event_resposta1ActionPerformed
+
+    private void resposta3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resposta3ActionPerformed
+        resposta1.setSelected(false);
+        resposta2.setSelected(false);
+        resposta3.setSelected(true);
+        resposta4.setSelected(false);
+        resposta_marcada = 2;
+    }//GEN-LAST:event_resposta3ActionPerformed
+
+    private void resposta4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resposta4ActionPerformed
+        resposta1.setSelected(false);
+        resposta2.setSelected(false);
+        resposta3.setSelected(false);
+        resposta4.setSelected(true);
+        resposta_marcada = 3;
+    }//GEN-LAST:event_resposta4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,4 +302,9 @@ public class Jogo extends javax.swing.JFrame {
     private javax.swing.JRadioButton resposta3;
     private javax.swing.JRadioButton resposta4;
     // End of variables declaration//GEN-END:variables
+
+    private void initDialogs() {
+       respostaEmBrancoDialog = new RespostaEmBrancoDialog(new javax.swing.JFrame(), true);
+       respostaEmBrancoDialog.setVisible(false);
+    }
 }

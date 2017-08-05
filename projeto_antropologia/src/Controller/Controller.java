@@ -52,5 +52,9 @@ public class Controller {
     }
 
     
+    public boolean respostaCerta(int resposta, Pergunta perg){
+        return quizz.respostaCerta(resposta, perg); 
+    }
+    
     
 }

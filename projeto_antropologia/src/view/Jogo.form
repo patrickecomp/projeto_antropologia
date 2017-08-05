@@ -83,6 +83,9 @@
         <Property name="text" type="java.lang.String" value="jRadioButton1"/>
         <Property name="actionCommand" type="java.lang.String" value="resposta1"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resposta1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="resposta2">
       <Properties>
@@ -104,6 +107,9 @@
         <Property name="text" type="java.lang.String" value="jRadioButton3"/>
         <Property name="actionCommand" type="java.lang.String" value="resposta3"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resposta3ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="resposta4">
       <Properties>
@@ -113,6 +119,9 @@
         <Property name="text" type="java.lang.String" value="jRadioButton4"/>
         <Property name="actionCommand" type="java.lang.String" value="resposta4"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resposta4ActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <Properties>
