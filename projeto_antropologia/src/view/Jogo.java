@@ -23,6 +23,7 @@ import model.Pergunta;
 
 public class Jogo extends javax.swing.JFrame {
 
+    FinalDeJogoDialog finalDeJogoDialog;
     RespostaEmBrancoDialog respostaEmBrancoDialog;
     int resposta_marcada = -1;
     Controller cont;
@@ -218,6 +219,14 @@ public class Jogo extends javax.swing.JFrame {
         resposta_marcada = 1;
     }//GEN-LAST:event_resposta2ActionPerformed
 
+    public void recomeca(){
+        try {
+            perguntaAtual = cont.ProximaPergunta();
+        } catch (FimDeJogoException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        bindingPergunta();
+    }
     private void proxima_perguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proxima_perguntaActionPerformed
         try {
             if(resposta_marcada == -1){
@@ -229,7 +238,8 @@ public class Jogo extends javax.swing.JFrame {
             }
             
         } catch (FimDeJogoException ex) {
-            //mostrar o resultado
+            finalDeJogoDialog.setTextOnFinal();
+            finalDeJogoDialog.setVisible(true);
         }
     }//GEN-LAST:event_proxima_perguntaActionPerformed
 
@@ -292,6 +302,7 @@ public class Jogo extends javax.swing.JFrame {
         });
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel imagem;
@@ -307,5 +318,8 @@ public class Jogo extends javax.swing.JFrame {
     private void initDialogs() {
        respostaEmBrancoDialog = new RespostaEmBrancoDialog(new javax.swing.JFrame(), true);
        respostaEmBrancoDialog.setVisible(false);
+       
+       finalDeJogoDialog = new FinalDeJogoDialog(this, true);
+       finalDeJogoDialog.setVisible(false);
     }
 }

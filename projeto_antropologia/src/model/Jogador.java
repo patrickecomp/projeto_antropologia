@@ -22,7 +22,9 @@ public class Jogador {
         return acertos;
     }
 
-    
+    public int getErros(){
+        return erros;
+    }
     
     public Jogador(String nome) {
         this.nome = nome;
