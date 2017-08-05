@@ -6,6 +6,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -51,6 +52,12 @@ public class TelaIniciar {
         buton.setLayout(new FlowLayout());
         inciar.setPreferredSize(new Dimension(100, 50));
         buton.add(inciar);
+        inciar.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iniciarActionPerformed(evt);
+            }
+        });
       
         //Container Principal
         Container c = janela.getContentPane();
@@ -63,7 +70,10 @@ public class TelaIniciar {
         c.add(BorderLayout.CENTER, buton);   
     }
 
-       
+        private void iniciarActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+            janela.dispose();
+            new Jogo().setVisible(true);
+    }  
      
 
     public static void main(String[] args) {
