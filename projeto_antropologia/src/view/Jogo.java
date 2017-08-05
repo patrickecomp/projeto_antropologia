@@ -35,6 +35,7 @@ public class Jogo extends javax.swing.JFrame {
         
         initDialogs();
         initComponents();
+        setLocationRelativeTo(null);
         setResizable(false);
         cont = Controller.getInstancia();
         cont.initDados();
@@ -221,6 +222,7 @@ public class Jogo extends javax.swing.JFrame {
     private void proxima_perguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proxima_perguntaActionPerformed
         try {
             if(resposta_marcada == -1){
+                respostaEmBrancoDialog.setModal(true);
                 respostaEmBrancoDialog.setVisible(true);
             }
             else{
@@ -306,6 +308,7 @@ public class Jogo extends javax.swing.JFrame {
 
     private void initDialogs() {
        respostaEmBrancoDialog = new RespostaEmBrancoDialog(new javax.swing.JFrame(), true);
+       respostaEmBrancoDialog.setLocationRelativeTo(this);
        respostaEmBrancoDialog.setVisible(false);
     }
 }
