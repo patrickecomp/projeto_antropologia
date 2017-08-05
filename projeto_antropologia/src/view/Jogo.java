@@ -23,6 +23,7 @@ import model.Pergunta;
 
 public class Jogo extends javax.swing.JFrame {
 
+    JLabel ultimo_label;
     FinalDeJogoDialog finalDeJogoDialog;
     RespostaEmBrancoDialog respostaEmBrancoDialog;
     int resposta_marcada = -1;
@@ -67,6 +68,7 @@ public class Jogo extends javax.swing.JFrame {
         if(perguntaAtual.getImagem() != null){
             JLabel label = new JLabel(perguntaAtual.getImagem());
             label.setBounds(0, 0, 257, 272);
+            imagem.removeAll();
             imagem.add(label);
             imagem.setVisible(true);
         } else{
@@ -233,6 +235,7 @@ public class Jogo extends javax.swing.JFrame {
                 respostaEmBrancoDialog.setVisible(true);
             }
             else{
+                cont.respostaCerta(resposta_marcada, perguntaAtual);
                 perguntaAtual = cont.ProximaPergunta();
                 bindingPergunta();
             }

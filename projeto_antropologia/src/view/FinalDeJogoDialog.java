@@ -28,7 +28,7 @@ public class FinalDeJogoDialog extends javax.swing.JDialog {
     
     public void setTextOnFinal(){
         texto_acerto.setText("VOCÊ ACERTOU " +Controller.getInstancia().getAcertos()+" PERGUNTAS!");
-        texto_erro.setText("VOCÊ ACERTOU " +Controller.getInstancia().getErros()+" PERGUNTAS!");
+        texto_erro.setText("VOCÊ ERROU " +Controller.getInstancia().getErros()+" PERGUNTAS!");
     }
 
     /**
