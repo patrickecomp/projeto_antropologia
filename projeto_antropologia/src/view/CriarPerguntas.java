@@ -22,6 +22,7 @@ public class CriarPerguntas extends javax.swing.JFrame {
     public CriarPerguntas() {
         initComponents();
         setResizable(false);
+        setLocationRelativeTo(null);
         controller = Controller.getInstancia();
         controller.initDados();
     }
@@ -95,6 +96,9 @@ public class CriarPerguntas extends javax.swing.JFrame {
         controller.addPergunta(pergunta_texto.getText(), pergunta_frame.respostas(), 
               pergunta_frame.respostaCorreta(), pergunta_frame.image);
         //fechar janela 
+        TelaIniciar ti = new TelaIniciar();
+        ti.iniciar();
+        dispose();
      
     }//GEN-LAST:event_botao_salvar_fecharActionPerformed
 
