@@ -6,7 +6,7 @@
 package model;
 
 import java.awt.BorderLayout;
-import java.util.Base64;
+//import java.util.Base64;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
