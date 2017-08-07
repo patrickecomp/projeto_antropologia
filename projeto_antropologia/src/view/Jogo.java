@@ -152,9 +152,9 @@ public class Jogo extends javax.swing.JFrame {
         pergunta.setBorder(null);
         jScrollPane1.setViewportView(pergunta);
 
-        proxima_pergunta.setBackground(new java.awt.Color(204, 204, 204));
+        proxima_pergunta.setBackground(new java.awt.Color(102, 255, 0));
         proxima_pergunta.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        proxima_pergunta.setForeground(new java.awt.Color(102, 255, 0));
+        proxima_pergunta.setForeground(new java.awt.Color(255, 255, 255));
         proxima_pergunta.setText("PRÓXIMA");
         proxima_pergunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

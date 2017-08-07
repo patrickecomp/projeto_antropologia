@@ -89,8 +89,10 @@ public class TelaIniciar {
     }
 
         private void iniciarActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-            janela.dispose();
+             janela.dispose();
             new Jogo().setVisible(true);
+           
+            
     }  
      
 
