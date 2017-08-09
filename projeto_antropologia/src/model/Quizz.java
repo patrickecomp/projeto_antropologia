@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.swing.ImageIcon;
+import view.RespostaCertaMacaco;
+import view.RespostaErradaMacaco;
 
 /**
  * Classe que representa a instancia do jogo;

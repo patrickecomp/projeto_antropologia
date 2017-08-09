@@ -27,6 +27,9 @@ public class Jogo extends javax.swing.JFrame {
     JLabel ultimo_label;
     FinalDeJogoDialog finalDeJogoDialog;
     RespostaEmBrancoDialog respostaEmBrancoDialog;
+    RespostaCertaMacaco respostaCertaMacaco;
+    RespostaErradaMacaco respostaErradaMacaco;
+    boolean certa = false;
     int resposta_marcada = -1;
     Controller cont;
     Pergunta perguntaAtual;
@@ -54,7 +57,7 @@ public class Jogo extends javax.swing.JFrame {
     
     private void limpar(){
         resposta_marcada = -1;
-         resposta1.setSelected(false);
+        resposta1.setSelected(false);
         resposta2.setSelected(false);
         resposta3.setSelected(false);
         resposta4.setSelected(false);
@@ -240,7 +243,14 @@ public class Jogo extends javax.swing.JFrame {
                 respostaEmBrancoDialog.setVisible(true);
             }
             else{
-                cont.respostaCerta(resposta_marcada, perguntaAtual);
+                certa = cont.respostaCerta(resposta_marcada, perguntaAtual);
+                if(certa == true){
+                    respostaCertaMacaco.setModal(true);
+                    respostaCertaMacaco.setVisible(true);
+                }else{
+                    respostaErradaMacaco.setModal(true);
+                    respostaErradaMacaco.setVisible(true);
+                }
                 perguntaAtual = cont.ProximaPergunta();
                 bindingPergunta();
             }
@@ -327,6 +337,14 @@ public class Jogo extends javax.swing.JFrame {
        respostaEmBrancoDialog = new RespostaEmBrancoDialog(new javax.swing.JFrame(), true);
        respostaEmBrancoDialog.setLocationRelativeTo(this);
        respostaEmBrancoDialog.setVisible(false);
+       
+       respostaCertaMacaco = new RespostaCertaMacaco(new javax.swing.JFrame(), true);
+       respostaCertaMacaco.setLocationRelativeTo(this);
+       respostaCertaMacaco.setVisible(false);
+       
+       respostaErradaMacaco = new RespostaErradaMacaco(new javax.swing.JFrame(), true);
+       respostaErradaMacaco.setLocationRelativeTo(this);
+       respostaErradaMacaco.setVisible(false);
        
        finalDeJogoDialog = new FinalDeJogoDialog(this, true);
        finalDeJogoDialog.setLocationRelativeTo(this);
